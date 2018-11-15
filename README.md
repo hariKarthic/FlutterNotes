@@ -13,3 +13,4 @@ For help getting started with Flutter, view our online
 ## 100 days of Code
 
 - **Day 1** : Set up boilerplate for the flutter app, so far so good.
+- **Day 2** : Buttons and messaging, got a grasp of the layout philosophy 

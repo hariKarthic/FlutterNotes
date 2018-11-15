@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:english_words/english_words.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
+    Widget titleSection = Container(
+      padding: EdgeInsets.all(32.0),
+      child: Text("Enter your Note"),
+    );
+    Widget ctaSection = Container(
+        padding: EdgeInsets.all(32.0),
+        child: FlatButton(
+          color: Color(0xFF42A5F5),
+          onPressed: () => debugPrint('button pressed yaay!!'),
+          child: Text("Press"),
+        ));
     return new MaterialApp(
         title: 'Note Fences',
         theme: new ThemeData(
@@ -26,7 +39,32 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Note Fences!!'),
           ),
-          body: RandomWords(),
+          body: ListView(
+            children: [titleSection, ctaSection],
+          ),
+        ));
+  }
+}
+
+class EnterNotes extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Widget enterNotes = Container(
+        padding: EdgeInsets.all(32.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 8.0),
+                    child: Text('Enter your note!'),
+                  )
+                ],
+              ),
+            )
+          ],
         ));
   }
 }
@@ -37,9 +75,9 @@ class RandomWordsState extends State<RandomWords> {
   final _biggerfont = const TextStyle(fontSize: 18.0);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: _buildSuggestions(),
-        appBar: AppBar(title: Text("Random word gen")));
+    return Scaffold(body: _buildSuggestions()
+        // appBar: AppBar(title: Text("Random word gen"))
+        );
   }
 
   Widget _buildRow(WordPair pair) {
