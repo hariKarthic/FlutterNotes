@@ -14,6 +14,14 @@ class MyApp extends StatelessWidget {
       padding: EdgeInsets.all(32.0),
       child: Text("Enter your Note"),
     );
+    Widget textFieldSection = Container(
+      padding: EdgeInsets.all(32.0),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: "Feel free..."
+        ),
+      ),
+    );
     Widget ctaSection = Container(
         padding: EdgeInsets.all(32.0),
         child: FlatButton(
@@ -40,11 +48,34 @@ class MyApp extends StatelessWidget {
             title: Text('Note Fences!!'),
           ),
           body: ListView(
-            children: [titleSection, ctaSection],
+            children: [titleSection,textFieldSection,ctaSection],
           ),
         ));
   }
 }
+
+class TextForm extends StatefulWidget{
+  @override
+  _TextFormState createState() => _TextFormState();
+}
+
+class _TextFormState extends State<TextForm>{
+  final textController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      padding: EdgeInsets.all(32.0),
+      child:TextField(
+        controller: textController,
+        decoration: InputDecoration(
+          helperText: "Type on..."
+        ),
+      )
+    );
+  }
+}
+
 
 class EnterNotes extends StatelessWidget {
   @override
