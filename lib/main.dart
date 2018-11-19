@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
     Widget textFieldSection = Container(
       padding: EdgeInsets.all(32.0),
       child: TextField(
-        decoration: InputDecoration(
-          hintText: "Feel free..."
-        ),
+        decoration: InputDecoration(hintText: "Feel free..."),
       ),
     );
     Widget ctaSection = Container(
@@ -48,34 +46,58 @@ class MyApp extends StatelessWidget {
             title: Text('Note Fences!!'),
           ),
           body: ListView(
-            children: [titleSection,textFieldSection,ctaSection],
+            children: [titleSection, TextForm()],
           ),
         ));
   }
 }
 
-class TextForm extends StatefulWidget{
+class TextForm extends StatefulWidget {
   @override
   _TextFormState createState() => _TextFormState();
 }
 
-class _TextFormState extends State<TextForm>{
-  final textController = TextEditingController();
+class _TextFormState extends State<TextForm> {
+  final textController = TextEditingController(text: "Hello there!");
+  Widget textWidget;
 
   @override
-  Widget build(BuildContext context){
-    return Container(
+  void initState() {
+    super.initState();
+    textWidget = Container(
+        padding: EdgeInsets.all(32.0),
+        child: TextField(
+          controller: textController,
+          decoration: InputDecoration(helperText: "Type on..."),
+        ));
+  }
+
+  Widget btnWidget = Container(
       padding: EdgeInsets.all(32.0),
-      child:TextField(
-        controller: textController,
-        decoration: InputDecoration(
-          helperText: "Type on..."
-        ),
-      )
+      child: FlatButton(
+        color: Color(0xFF42A5F5),
+        onPressed: () => debugPrint('button pressed yaay!!'),
+        child: Text("Press"),
+      ));
+
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: Expanded(
+        child:Column(
+          children: [textWidget, btnWidget],
+        )
+      ),
     );
   }
 }
-
 
 class EnterNotes extends StatelessWidget {
   @override
