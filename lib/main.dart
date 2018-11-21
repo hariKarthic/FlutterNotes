@@ -3,13 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyApp()); //React.render()
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //render()
     Widget titleSection = Container(
       padding: EdgeInsets.all(32.0),
       child: Text("Enter your Note"),
@@ -20,13 +21,8 @@ class MyApp extends StatelessWidget {
         decoration: InputDecoration(hintText: "Feel free..."),
       ),
     );
-    Widget ctaSection = Container(
-        padding: EdgeInsets.all(32.0),
-        child: FlatButton(
-          color: Color(0xFF42A5F5),
-          onPressed: () => debugPrint('button pressed yaay!!'),
-          child: Text("Press"),
-        ));
+
+   
     return new MaterialApp(
         title: 'Note Fences',
         theme: new ThemeData(
@@ -58,8 +54,9 @@ class TextForm extends StatefulWidget {
 }
 
 class _TextFormState extends State<TextForm> {
-  final textController = TextEditingController(text: "Hello there!");
+  final textController = TextEditingController();
   Widget textWidget;
+  Widget btnWidget;
 
   @override
   void initState() {
@@ -70,16 +67,14 @@ class _TextFormState extends State<TextForm> {
           controller: textController,
           decoration: InputDecoration(helperText: "Type on..."),
         ));
+    btnWidget = Container(
+        padding: EdgeInsets.all(32.0),
+        child: FlatButton(
+          color: Color(0xFF42A5F5),
+          onPressed: () => debugPrint("Value:${textController.text}"),
+          child: Text("Press"),
+        ));
   }
-
-  Widget btnWidget = Container(
-      padding: EdgeInsets.all(32.0),
-      child: FlatButton(
-        color: Color(0xFF42A5F5),
-        onPressed: () => debugPrint('button pressed yaay!!'),
-        child: Text("Press"),
-      ));
-
 
   @override
   void dispose() {
@@ -90,11 +85,13 @@ class _TextFormState extends State<TextForm> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: Expanded(
-        child:Column(
-          children: [textWidget, btnWidget],
+      children: [
+        Expanded(
+          child: Column(
+            children: [textWidget, btnWidget],
+          ),
         )
-      ),
+      ],
     );
   }
 }
