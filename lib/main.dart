@@ -1,7 +1,5 @@
-import 'package:english_words/english_words.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/semantics.dart';
 import 'listing.dart';
 
 void main() {
@@ -26,6 +24,11 @@ class MyApp extends StatelessWidget {
 
     return new MaterialApp(
         title: 'Note Fences',
+        initialRoute: '/',
+        routes: {
+          "/":(context) => FirstScreen(),
+          "/second": (context) => SecondScreen(),
+        },
         theme: new ThemeData(
           // This is the theme of your application.
           //
@@ -38,14 +41,43 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         //home: new MyHomePage(title: 'Note Fences-Home Page'),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Note Fences!!'),
-          ),
-          body: ListView(
-            children: [titleSection, TextForm()],
-          ),
-        ));
+        );
+  }
+}
+
+class SecondScreen extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title:Text('Note List')
+      ),
+      body:Center(
+        child: FlatButton(
+          child: Text("Back"),
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+      )
+    );
+  }
+}
+class FirstScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    Widget titleSection = Container(
+      padding: EdgeInsets.all(32.0),
+      child: Text("Enter your Note"),
+    );
+    return Scaffold(
+      appBar:AppBar(
+        title:  Text('Note Fences'),
+      ) ,
+      body: ListView(
+        children: <Widget>[titleSection,TextForm()],
+      ),
+    );
   }
 }
 
